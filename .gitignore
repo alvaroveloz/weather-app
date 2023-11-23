@@ -1,0 +1,26 @@
+# Dependencias de Node.js
+node_modules/
+
+# Archivos de construcción y carpetas generadas por TypeScript
+dist/
+*.js
+*.js.map
+*.d.ts
+
+# Archivos de configuración generados por TypeScript
+tsconfig.tsbuildinfo
+
+# Archivos de registro
+*.log
+
+# Archivos de configuración de desarrollo locales (pueden variar según tu entorno)
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Archivos generados por sistemas de construcción
+build/
+dist/
+out/
