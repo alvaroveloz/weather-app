@@ -17,9 +17,9 @@ const main = async () => {
         const placesFound = await search.City(place)
         const option = await listPlacesToShow(placesFound)
         if (option === 0) continue;
-        const city = placesFound.filter((place) => {
+        const city = placesFound.find((place) => {
           return place.id === option
-        }).pop()
+        })
         if (!city) break
         search.addHistory(city.name)
         const weather = await search.weatherPlace( city.lat, city.lng )
