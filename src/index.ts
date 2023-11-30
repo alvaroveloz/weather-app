@@ -24,14 +24,8 @@ const main = async () => {
         search.addHistory(city.name)
         const weather = await search.weatherPlace( city.lat, city.lng )
         if(!weather) break
-        console.log(green('\nInformation about the city\n'))
-        console.log(`${yellow('City:')} ${city.name}`)
-        console.log(`${yellow('Lat')}: ${city.lat}`)
-        console.log(`${yellow('Lng')}: ${city.lng}`)
-        console.log(`${yellow('Description')}: ${weather.description} `)
-        console.log(`${yellow('Temperature')}: ${weather.temp} `)
-        console.log(`${yellow('Min')}: ${weather.min} `)
-        console.log(`${yellow('Max')}: ${weather.max} `)
+        search.showPlaceInformation(city)
+        search.showWeatherInformation(weather)
         break;
 
       case 2:

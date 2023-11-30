@@ -4,6 +4,7 @@ import fs from 'fs'
 
 import { Place, PlaceAPI } from "../interfaces/Place"
 import { Weather } from "../interfaces"
+import { green, yellow } from "colors"
 
 export class Search {
   constructor(public historial: string[] = [], public dbPath: string = './src/db/database.json') {
@@ -107,6 +108,20 @@ export class Search {
     const info = fs.readFileSync(this.dbPath, { encoding: 'utf-8' })
     const data = JSON.parse(info)
     this.historial = data.historial
+  }
+
+  showPlaceInformation( place: Place) {
+    console.log(green('\nInformation about the city\n'))
+    console.log(`${yellow('City:')} ${place.name}`)
+    console.log(`${yellow('Lat')}: ${place.lat}`)
+    console.log(`${yellow('Lng')}: ${place.lng}`)
+  }
+
+  showWeatherInformation (weather: Weather) {
+    console.log(`${yellow('Description')}: ${weather.description} `)
+    console.log(`${yellow('Temperature')}: ${weather.temp} `)
+    console.log(`${yellow('Min')}: ${weather.min} `)
+    console.log(`${yellow('Max')}: ${weather.max} `)
   }
 
 }
