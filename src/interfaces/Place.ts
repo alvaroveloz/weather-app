@@ -18,6 +18,6 @@ export interface PlaceAPI {
 export interface Place {
   id: number,
   name: string,
-  lat: number,
-  lng: number
+  lat: string,
+  lng: string
 }
