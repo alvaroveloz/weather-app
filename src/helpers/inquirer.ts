@@ -10,8 +10,9 @@ import { Place } from '../interfaces/Place';
 
 export const inquirerMenu = async () => {
   console.clear();
+  const header = `\n${green('=====================')}\n Select an option \n${green('=====================')}\n`
   const options = await select({
-    message: 'Select an option',
+    message: header,
     choices: menu
   })
 

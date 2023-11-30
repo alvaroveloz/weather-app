@@ -1,6 +1,6 @@
 import { inquirerMenu, listPlacesToShow, pauseMenu, readInput } from "./helpers"
 import { Search } from "./models"
-import { green } from "colors"
+import { yellow, green } from "colors"
 
 const main = async () => {
 
@@ -15,17 +15,30 @@ const main = async () => {
       case 1:
         const place = await readInput()
         const placesFound = await search.City(place)
-        listPlacesToShow(placesFound)
-        break;
-        //* Show cities
-        //* Select city
+        const option = await listPlacesToShow(placesFound)
+        if (option === 0) continue;
+        const city = placesFound.filter((place) => {
+          return place.id === option
+        }).pop()
+        if (!city) break
+        search.addHistory(city.name)
+        const weather = await search.weatherPlace( city.lat, city.lng )
+        if(!weather) break
         console.log(green('\nInformation about the city\n'))
-        console.log(`City: `)
-        console.log(`Lat:`)
-        console.log(`Lng:`)
-        console.log(`Temperature:`)
-        console.log(`Min:`)
-        console.log(`Max:`)
+        console.log(`${yellow('City:')} ${city.name}`)
+        console.log(`${yellow('Lat')}: ${city.lat}`)
+        console.log(`${yellow('Lng')}: ${city.lng}`)
+        console.log(`${yellow('Description')}: ${weather.description} `)
+        console.log(`${yellow('Temperature')}: ${weather.temp} `)
+        console.log(`${yellow('Min')}: ${weather.min} `)
+        console.log(`${yellow('Max')}: ${weather.max} `)
+        break;
+
+      case 2:
+        search.historialCapitalized.forEach((place, index) => {
+          const idx =`${ green((index + 1).toString())}`
+          console.log(`${idx}. ${place}`)
+        })
         break;
 
       default:
